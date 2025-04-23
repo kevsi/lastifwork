@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Groupes de Discussion{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+
+    {% set groupes = [
+        { id: 1, nom: 'Département Informatique' },
+        { id: 2, nom: 'Comité Pédagogique' },
+        { id: 3, nom: 'Club IA & Big Data' }
+    ] %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        {% include "navbar.html.twig" %}
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Mes Groupes de Discussion</h6>
+                        </div>
+                        <div class="card-body px-4">
+                            <ul class="list-group">
+                                {% for groupe in groupes %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ groupe.nom }}
+                                        <a href="{{ path('app_discussion_groupe', { id: groupe.id }) }}" class="btn btn-sm btn-outline-primary">
+                                            Ouvrir
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item text-muted">Aucun groupe trouvé.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

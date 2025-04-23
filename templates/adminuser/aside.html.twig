@@ -1,0 +1,259 @@
+<!-- Sidebar for Document Management System Administrator -->
+<aside class="sidebar-container">
+  <!-- Admin Profile Section -->
+  <div class="admin-profile">
+    <div class="profile-avatar">
+      <img src="/api/placeholder/40/40" alt="Admin" />
+    </div>
+    <div class="profile-info">
+      <h4>Administrateur</h4>
+      <span class="status-badge">En ligne</span>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="nav-item active">
+        <a href="dashboard.html">
+          <i class="material-icons">dashboard</i>
+          <span>Tableau de bord</span>
+        </a>
+      </li>
+      
+      <!-- User Management Section -->
+      <li class="nav-section">
+        <span class="nav-section-title">Gestion des utilisateurs</span>
+        <ul>
+          <li class="nav-item">
+            <a href="users-list.html">
+              <i class="material-icons">people</i>
+              <span>Liste des utilisateurs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="user-permissions.html">
+              <i class="material-icons">security</i>
+              <span>Droits d'accès</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="user-groups.html">
+              <i class="material-icons">group_work</i>
+              <span>Groupes</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- Document Management Section -->
+      <li class="nav-section">
+        <span class="nav-section-title">Gestion documentaire</span>
+        <ul>
+          <li class="nav-item">
+            <a href="document-spaces.html">
+              <i class="material-icons">folder</i>
+              <span>Espaces documentaires</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="document-templates.html">
+              <i class="material-icons">description</i>
+              <span>Modèles de documents</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="document-metadata.html">
+              <i class="material-icons">label</i>
+              <span>Métadonnées</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="document-workflow.html">
+              <i class="material-icons">assignment</i>
+              <span>Workflows</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="document-archive.html">
+              <i class="material-icons">archive</i>
+              <span>Archivage</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- Reports Section -->
+      <li class="nav-section">
+        <span class="nav-section-title">Rapports</span>
+        <ul>
+          <li class="nav-item">
+            <a href="activity-reports.html">
+              <i class="material-icons">assessment</i>
+              <span>Rapports d'activité</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="usage-statistics.html">
+              <i class="material-icons">insert_chart</i>
+              <span>Statistiques d'utilisation</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <!-- Support Section -->
+      <li class="nav-section">
+        <span class="nav-section-title">Support</span>
+        <ul>
+          <li class="nav-item">
+            <a href="user-support.html">
+              <i class="material-icons">help</i>
+              <span>Assistance utilisateurs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="contact-super-admin.html">
+              <i class="material-icons">contact_support</i>
+              <span>Contacter super admin</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- Bottom Settings Link -->
+  <div class="sidebar-footer">
+    <a href="settings.html">
+      <i class="material-icons">settings</i>
+      <span>Paramètres</span>
+    </a>
+    <a href="logout.html">
+      <i class="material-icons">exit_to_app</i>
+      <span>Déconnexion</span>
+    </a>
+  </div>
+</aside>
+
+<!-- CSS for the sidebar - Material Design inspired -->
+<style>
+  .sidebar-container {
+    width: 260px;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .admin-profile {
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .profile-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    margin-left: 12px;
+  }
+  
+  .profile-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    font-size: 12px;
+    color: #4CAF50;
+  }
+  
+  .sidebar-nav {
+    flex: 1;
+    padding: 16px 0;
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-section {
+    margin-bottom: 8px;
+  }
+  
+  .nav-section-title {
+    display: block;
+    padding: 8px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #757575;
+    font-weight: 500;
+  }
+  
+  .nav-item {
+    margin: 2px 0;
+  }
+  
+  .nav-item a {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    color: #424242;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border-left: 3px solid transparent;
+  }
+  
+  .nav-item a:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  .nav-item.active a {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+    border-left: 3px solid #2196F3;
+  }
+  
+  .nav-item i.material-icons {
+    margin-right: 12px;
+    font-size: 20px;
+  }
+  
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sidebar-footer a {
+    display: flex;
+    align-items: center;
+    color: #757575;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .sidebar-footer a i.material-icons {
+    margin-right: 8px;
+    font-size: 18px;
+  }
+</style>

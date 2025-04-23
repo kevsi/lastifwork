@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de Catégorie - Système de Gestion Documentaire
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .color-selector-container {
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .color-preview-area {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+        }
+
+        .selected-color-preview {
+            width: 40px;
+            height: 40px;
+            background-color: #4a69bd;
+            border-radius: 0.25rem;
+            margin-right: 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .selected-color-name {
+            color: #495057;
+            font-family: monospace;
+        }
+
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 0.5rem;
+        }
+
+        .color-item {
+            width: 100%;
+            aspect-ratio: 1;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .color-item:hover {
+            transform: scale(1.1);
+        }
+
+        .color-item.selected {
+            box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2196F3;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+	{% include "aside.html.twig" %}
+
+	<main
+		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+		{# Inclure la barre de navigation #}
+		{% include "navbar.html.twig" %}
+
+		<div class="container-fluid py-2">
+			<div class="row">
+				<div class="col-12">
+					<div
+						class="card my-4">
+						{# En-tête de la carte #}
+						<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+							<div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+								<h6 class="text-white text-capitalize ps-3">Création de catégorie</h6>
+							</div>
+						</div>
+
+						{# Corps de la carte avec le formulaire de création #}
+						<div class="card-body px-4 pt-4 pb-3">
+							{{ form_start(form, {'attr': {'id': 'create-category-form'}}) }}
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<div class="input-group input-group-static mb-4">
+										<label for="{{ form.name.vars.id }}">Nom de la catégorie</label>
+										{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+										{{ form_errors(form.name) }}
+									</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<div class="input-group input-group-static mb-4">
+										<label for="{{ form.slug.vars.id }}">Slug</label>
+										{{ form_widget(form.slug, {'attr': {'class': 'form-control', 'placeholder': 'Laissez vide pour génération automatique'}}) }}
+										{{ form_errors(form.slug) }}
+										<small class="form-text text-muted">Identifiant unique pour l'URL</small>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<div class="input-group input-group-static mb-4">
+										<label for="{{ form.parent.vars.id }}">Catégorie parente</label>
+										{{ form_widget(form.parent, {'attr': {'class': 'form-control'}}) }}
+										{{ form_errors(form.parent) }}
+										<small class="form-text text-muted">Sélectionnez une catégorie parente pour créer une hiérarchie</small>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<div class="input-group input-group-static mb-4">
+										<label for="{{ form.description.vars.id }}">Description</label>
+										{{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': '4'}}) }}
+										{{ form_errors(form.description) }}
+									</div>
+								</div>
+							</div>
+
+							{# 🔧 AJOUT : champ icône avec nouveau sélecteur #}
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="{{ form.color.vars.id }}" class="mb-2">Couleur</label>
+									<div class="color-selector-container">
+										{{ form_widget(form.color, {'attr': {'class': 'form-control visually-hidden', 'id': 'colorInput'}}) }}
+										{{ form_errors(form.color) }}
+
+										<div class="color-preview-area mb-2">
+											<div class="selected-color-preview" id="selectedColorPreview"></div>
+											<span class="selected-color-name" id="selectedColorName">#4a69bd</span>
+										</div>
+
+										<div
+											class="colors-grid mt-3" id="colorsGrid"><!-- Les couleurs seront générées ici -->
+										</div>
+									</div>
+								</div>
+								{# 🔧 AJOUT : champ statut #}
+								<div class="col-md-6 mb-3">
+									<div class="input-group input-group-static mb-4">
+										<label for="{{ form.status.vars.id }}">Statut</label>
+										{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+										{{ form_errors(form.status) }}
+									</div>
+								</div>
+							</div>
+
+							{# Inclure tous les champs non rendus explicitement #}
+							{{ form_rest(form) }}
+
+							<div class="row mt-4">
+								<div class="col-md-12 text-end">
+									<a href="{{ path('app_categories') }}" class="btn btn-outline-secondary me-2">Annuler</a>
+									<button type="submit" class="btn bg-gradient-dark">Enregistrer</button>
+								</div>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Liste de couleurs prédéfinies
+    const colorPalette = [
+        // Blues
+        '#1e88e5', '#1976d2', '#1565c0', '#0d47a1', '#82b1ff', '#448aff', '#2979ff', '#2962ff',
+        // Purples
+        '#8e24aa', '#7b1fa2', '#6a1b9a', '#4a148c', '#ea80fc', '#e040fb', '#d500f9', '#aa00ff',
+        // Reds
+        '#e53935', '#d32f2f', '#c62828', '#b71c1c', '#ff8a80', '#ff5252', '#ff1744', '#d50000',
+        // Oranges
+        '#fb8c00', '#f57c00', '#ef6c00', '#e65100', '#ffd180', '#ffab40', '#ff9100', '#ff6d00',
+        // Greens
+        '#43a047', '#388e3c', '#2e7d32', '#1b5e20', '#b9f6ca', '#69f0ae', '#00e676', '#00c853',
+        // Teals and Cyans
+        '#00acc1', '#0097a7', '#00838f', '#006064', '#84ffff', '#18ffff', '#00e5ff', '#00b8d4',
+        // Grays
+        '#757575', '#616161', '#424242', '#212121', '#bdbdbd', '#9e9e9e', '#7d7d7d', '#5d5d5d',
+        // Yellows and Ambers
+        '#fdd835', '#fbc02d', '#f9a825', '#f57f17', '#ffe57f', '#ffd740', '#ffc400', '#ffab00'
+    ];
+
+    // Utiliser un sélecteur plus robuste pour trouver le champ de couleur
+    const colorInput = document.querySelector('input[name$="[color]"]');
+    const colorGrid = document.getElementById('colorsGrid');
+    const selectedColorPreview = document.getElementById('selectedColorPreview');
+    const selectedColorName = document.getElementById('selectedColorName');
+
+    if (colorGrid && colorInput && selectedColorPreview && selectedColorName) {
+        // Initialiser avec la valeur existante ou par défaut
+        const initialColor = colorInput.value || '#4a69bd';
+
+        selectedColorPreview.style.backgroundColor = initialColor;
+        selectedColorName.textContent = initialColor;
+
+        // Générer la grille de couleurs
+        colorPalette.forEach(color => {
+            const colorItem = document.createElement('div');
+            colorItem.className = 'color-item';
+            colorItem.style.backgroundColor = color;
+            colorItem.dataset.color = color;
+
+            if (color.toLowerCase() === initialColor.toLowerCase()) {
+                colorItem.classList.add('selected');
+            }
+
+            colorItem.addEventListener('click', function() {
+                document.querySelectorAll('.color-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                colorItem.classList.add('selected');
+
+                selectedColorPreview.style.backgroundColor = color;
+                selectedColorName.textContent = color;
+                colorInput.value = color;
+            });
+
+            colorGrid.appendChild(colorItem);
+        });
+    }
+});
+</script>
+</script>
+{% endblock %}

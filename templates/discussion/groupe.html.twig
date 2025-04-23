@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discussion de Groupe - Système de Gestion Documentaire{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+
+    {# Simuler les données #}
+    {% set currentUser = { id: 1, nom: 'Alex' } %}
+
+    {% set groupes = [
+        { id: 1, nom: 'Département Informatique' },
+        { id: 2, nom: 'Comité Pédagogique' },
+        { id: 3, nom: 'Club IA & Big Data' }
+    ] %}
+
+    {% set groupe = groupes[0] %}
+
+    {% set messages = [
+        {
+            contenu: "Bonjour à tous, n'oubliez pas de déposer vos rapports.",
+            createdAt: date("2025-04-17 09:00"),
+            utilisateur: { id: 2, nom: "Prof. Dupont" }
+        },
+        {
+            contenu: "Merci, c'est noté !",
+            createdAt: date("2025-04-17 09:05"),
+            utilisateur: { id: 1, nom: "Alex" }
+        },
+        {
+            contenu: "Est-ce qu'on doit les déposer en PDF ?",
+            createdAt: date("2025-04-17 09:08"),
+            utilisateur: { id: 3, nom: "Lina" }
+        },
+        {
+            contenu: "Oui, uniquement en PDF. Merci !",
+            createdAt: date("2025-04-17 09:10"),
+            utilisateur: { id: 2, nom: "Prof. Dupont" }
+        }
+    ] %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        {% include "navbar.html.twig" %}
+
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-12">
+                   
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">
+                                    Discussion - Groupe {{ groupe.id }}
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="card-body px-4 pt-4 pb-3">
+                            <div class="chat-box border p-3 mb-4" style="height: 400px; overflow-y: auto;" id="chat-box">
+                                {% for message in messages %}
+                                    <div class="d-flex mb-3 {% if message.utilisateur.id == currentUser.id %}justify-content-end{% else %}justify-content-start{% endif %}">
+                                        <div class="p-3 rounded {% if message.utilisateur.id == currentUser.id %}bg-gradient-dark text-white{% else %}bg-gray-100{% endif %}" style="max-width: 75%;">
+                                            <small class="d-block fw-bold">{{ message.utilisateur.nom }}</small>
+                                            <p class="mb-1">{{ message.contenu }}</p>
+                                            <small class="text-muted">{{ message.createdAt|date('d/m/Y H:i') }}</small>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p class="text-muted text-center">Aucun message pour ce groupe.</p>
+                                {% endfor %}
+                            </div>
+
+                            <form method="post" action="#">
+                                <div class="input-group">
+                                    <input type="text" name="contenu" class="form-control" placeholder="Écrivez un message..." required>
+                                    <button class="btn bg-gradient-primary" type="submit">
+                                        <i class="material-symbols-rounded">send</i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+{% endblock %}

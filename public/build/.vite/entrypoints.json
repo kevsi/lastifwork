@@ -1,0 +1,25 @@
+{
+  "base": "/build/",
+  "entryPoints": {
+    "app": {
+      "css": [
+        "/build/assets/app-BoN-pnce.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/build/assets/js/app-Do_B-fn_.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "8.0.2",
+    8,
+    0,
+    2
+  ],
+  "viteServer": null
+}

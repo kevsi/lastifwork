@@ -1,0 +1,417 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Multimédias{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        {% include "navbar.html.twig" %}
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <div class="d-flex justify-content-between align-items-center px-3">
+                                    <div class="d-flex align-items-center ps-3">
+                                        <h6 class="text-white text-capitalize mb-0">Liste des Multimédias</h6>
+                                        <span class="badge bg-gradient-success ms-3">24 fichiers</span>
+                                    </div>
+                                    <a href="javascript:;" class="btn btn-sm bg-gradient-dark mb-0">
+                                        <i class="material-symbols-rounded text-sm">upload</i>&nbsp;&nbsp;Nouveau média
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Média</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Taille</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date d'ajout</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Catégorie</th>
+                                            <th class="text-secondary opacity-7"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in 1..5 %}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="avatar avatar-sm me-3 bg-gradient-secondary rounded-3 d-flex align-items-center justify-content-center">
+                                                            <i class="material-symbols-rounded text-white opacity-10">
+                                                                {% if i == 1 %}image{% 
+                                                                elseif i == 2 %}movie{% 
+                                                                elseif i == 3 %}music_note{% 
+                                                                elseif i == 4 %}picture_as_pdf{% 
+                                                                else %}image{% endif %}
+                                                            </i>
+                                                        </div>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                {% if i == 1 %}Présentation_2025.jpg{% 
+                                                                elseif i == 2 %}Video_Produit.mp4{% 
+                                                                elseif i == 3 %}Jingle_Entreprise.mp3{% 
+                                                                elseif i == 4 %}Rapport_Annuel.pdf{% 
+                                                                else %}Logo_Entreprise.png{% endif %}
+                                                            </h6>
+                                                            <p class="text-xs text-secondary mb-0">
+                                                                {% if i == 1 %}ID: IMG-001{% 
+                                                                elseif i == 2 %}ID: VID-002{% 
+                                                                elseif i == 3 %}ID: AUD-003{% 
+                                                                elseif i == 4 %}ID: DOC-004{% 
+                                                                else %}ID: IMG-005{% endif %}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {% if i == 1 %}Image JPG{% 
+                                                        elseif i == 2 %}Vidéo MP4{% 
+                                                        elseif i == 3 %}Audio MP3{% 
+                                                        elseif i == 4 %}Document PDF{% 
+                                                        else %}Image PNG{% endif %}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        {% if i == 1 %}1920x1080 px{% 
+                                                        elseif i == 2 %}HD 720p{% 
+                                                        elseif i == 3 %}320 kbps{% 
+                                                        elseif i == 4 %}8 pages{% 
+                                                        else %}600x600 px{% endif %}
+                                                    </p>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-xs font-weight-bold">
+                                                        {% if i == 1 %}2.4 MB{% 
+                                                        elseif i == 2 %}15.8 MB{% 
+                                                        elseif i == 3 %}3.2 MB{% 
+                                                        elseif i == 4 %}5.5 MB{% 
+                                                        else %}0.8 MB{% endif %}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-xs font-weight-bold">
+                                                        {% if i == 1 %}20 mars 2025{% 
+                                                        elseif i == 2 %}15 mars 2025{% 
+                                                        elseif i == 3 %}10 mars 2025{% 
+                                                        elseif i == 4 %}5 mars 2025{% 
+                                                        else %}1 mars 2025{% endif %}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <span class="badge badge-sm {% if i == 1 %}bg-gradient-info{% elseif i == 2 %}bg-gradient-success{% elseif i == 3 %}bg-gradient-warning{% elseif i == 4 %}bg-gradient-danger{% else %}bg-gradient-primary{% endif %}">
+                                                        {% if i == 1 %}Marketing{% elseif i == 2 %}Produits{% elseif i == 3 %}Communication{% elseif i == 4 %}Finances{% else %}Branding{% endif %}
+                                                    </span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="d-flex">
+                                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Visualiser le média">
+                                                            <i class="material-symbols-rounded text-sm">visibility</i>
+                                                        </a>
+                                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Télécharger">
+                                                            <i class="material-symbols-rounded text-sm">download</i>
+                                                        </a>
+                                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                                            <i class="material-symbols-rounded text-sm">edit</i>
+                                                        </a>
+                                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+                                                            <i class="material-symbols-rounded text-sm">delete</i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-sm text-secondary">
+                                    Affichage de <strong>1-5</strong> sur <strong>24</strong> fichiers multimédias
+                                </div>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript:;" tabindex="-1" aria-disabled="true">
+                                                <span aria-hidden="true"><i class="material-symbols-rounded text-sm">keyboard_arrow_left</i></span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:;">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:;">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:;">4</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:;">5</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:;">
+                                                <span aria-hidden="true"><i class="material-symbols-rounded text-sm">keyboard_arrow_right</i></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters and search section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header p-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Filtres et recherche</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="input-group input-group-outline">
+                                        <label class="form-label text-light" placeholder="Rechercher par nom..."></label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select border p-2 px-3 rounded">
+                                        <option selected>Type de média</option>
+                                        <option value="1">Image</option>
+                                        <option value="2">Vidéo</option>
+                                        <option value="3">Audio</option>
+                                        <option value="4">Document</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select border p-2 px-3 rounded">
+                                        <option selected>Catégorie</option>
+                                        <option value="1">Marketing</option>
+                                        <option value="2">Produits</option>
+                                        <option value="3">Communication</option>
+                                        <option value="4">Finances</option>
+                                        <option value="5">Branding</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select border p-2 px-3 rounded">
+                                        <option selected>Trier par</option>
+                                        <option value="1">Plus récent</option>
+                                        <option value="2">Plus ancien</option>
+                                        <option value="3">Taille (croissant)</option>
+                                        <option value="4">Taille (décroissant)</option>
+                                        <option value="5">Nom (A-Z)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn bg-gradient-info w-100">Filtrer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="row mt-4">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-symbols-rounded opacity-10">photo_library</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Total fichiers</p>
+                                <h4 class="mb-0">24</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5 </span>cette semaine</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-symbols-rounded opacity-10">image</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Images</p>
+                                <h4 class="mb-0">12</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">50% </span>du total</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-symbols-rounded opacity-10">movie</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Vidéos</p>
+                                <h4 class="mb-0">7</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-warning text-sm font-weight-bolder">+2 </span>ce mois-ci</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-header p-3 pt-2">
+                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-symbols-rounded opacity-10">storage</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize">Espace utilisé</p>
+                                <h4 class="mb-0">182 MB</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">18% </span>de la capacité</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Preview -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header p-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Aperçu de la galerie</h5>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <button class="btn btn-outline-primary btn-sm">Voir tous les médias</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row g-3">
+                                {% for i in 1..6 %}
+                                <div class="col-md-2">
+                                    <div class="card card-product card-plain">
+                                        <div class="position-relative">
+                                            <div class="card-header p-0 position-relative mx-3 mt-3 z-index-2">
+                                                <a href="javascript:;" class="d-block blur-shadow-image">
+                                                    <div class="ratio ratio-1x1 rounded bg-cover" style="background-image: url('https://img.freepik.com/vecteurs-libre/photographe-masculin-vecteur-croquis-dessines-main-appareil-photo_460848-14670.jpg?t=st=1744914088~exp=1744917688~hmac=ff22544e17d1d16480d337c3415ec4472c3509f08f10576112512ad4ed6b9492&w=740'); background-position: center;"></div>
+                                                </a>
+                                                <div class="position-absolute top-0 end-0 p-2">
+                                                    <button class="btn btn-sm btn-icon-only btn-simple btn-dark mb-0">
+                                                        <i class="material-symbols-rounded text-sm">visibility</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body text-center p-2">
+                                            <p class="text-dark mb-0 text-sm">
+                                                {% if i == 1 %}Image_01.jpg{% 
+                                                elseif i == 2 %}Video_01.mp4{% 
+                                                elseif i == 3 %}Audio_01.mp3{% 
+                                                elseif i == 4 %}Doc_01.pdf{% 
+                                                elseif i == 5 %}Image_02.png{% 
+                                                else %}Video_02.mp4{% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent activity timeline -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header p-3">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">Activité récente</h5>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <button class="btn btn-outline-primary btn-sm">Voir toutes les activités</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="timeline timeline-one-side">
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-symbols-rounded text-success text-gradient">upload</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Vidéo "Video_Produit.mp4" ajoutée</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">15 mars 2025</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="material-symbols-rounded text-warning text-gradient">edit</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Image "Présentation_2025.jpg" modifiée</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 mars 2025</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-block">
+                                    <span class="timeline-step">
+                                        <i class="material-symbols-rounded text-info text-gradient">delete</i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Document "Ancien_Rapport.pdf" supprimé</h6>
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">10 mars 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fixed floating action button -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <button class="btn btn-fab btn-fab-mini btn-primary shadow-lg">
+            <i class="material-symbols-rounded">file_upload</i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (navigator.platform.indexOf('Win') > -1 && document.querySelector('#sidenav-scrollbar')) {
+                const options = {
+                    damping: '0.5'
+                };
+                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+            }
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+{% endblock %}

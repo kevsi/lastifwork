@@ -1,0 +1,654 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Welcome
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        :root {
+            --primary-color: #4F9CF9;
+            --secondary-color: #043873;
+            --white: #ffffff;
+            --light-blue: #C4DDFF;
+            --gray: #6C757D;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+            background-color: #FAFBFC;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-weight: 500;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-weight: 500;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-link {
+            color: var(--white) !important;
+            margin: 0 12px;
+            font-weight: 500;
+        }
+
+        .hero-section {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 120px 0 80px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .feature-section {
+            padding: 80px 0;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-icon i {
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-section {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 80px 0;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 20px 0;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+
+        .pricing-section {
+            padding: 80px 0;
+            background-color: #F8FAFC;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 40px 32px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .pricing-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .pricing-price {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .pricing-period {
+            font-size: 16px;
+            color: var(--gray);
+        }
+
+        .pricing-features {
+            margin-bottom: 32px;
+        }
+
+        .pricing-feature {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-feature i {
+            color: var(--primary-color);
+            margin-right: 12px;
+        }
+
+        .cta-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: 16px;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-link a:hover {
+            opacity: 1;
+        }
+
+        .footer-social {
+            display: flex;
+            margin-top: 24px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--white);
+            transition: background-color 0.3s;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/api/placeholder/180/40" alt="Whitepace Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-3">Login</a>
+                    <a href="#" class="btn btn-primary">Try Whitepace Free</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Get More Done with Whitepace</h1>
+                    <p class="hero-text">Project management software that enables your teams to collaborate, plan, analyze and manage everyday tasks</p>
+                    <div class="d-flex flex-wrap">
+                        <a href="#" class="btn btn-primary me-3 mb-3">Try Whitepace Free</a>
+                        <a href="#" class="btn btn-outline-light mb-3">View Demo</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/api/placeholder/600/500" alt="Hero Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Powerful Features</h2>
+                <p class="text-muted mb-0">Powerful features to help you manage all your work in one place</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="feature-title">Project Management</h3>
+                        <p>Keep tasks in order, deadlines on track, and team members aligned with Whitepace</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="feature-title">Team Collaboration</h3>
+                        <p>Collaborate in real-time with your team and keep everyone in sync</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Analytics & Reporting</h3>
+                        <p>Get detailed insights and metrics to optimize your team's performance</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <h2 class="fw-bold mb-4">How Whitepace Works</h2>
+                    <p class="mb-4">Whitepace is designed to streamline your workflow, enhance collaboration, and boost productivity.</p>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">1</div>
+                        <div>
+                            <h5 class="mb-1">Create Projects</h5>
+                            <p class="mb-0 text-muted">Set up projects and invite your team members</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">2</div>
+                        <div>
+                            <h5 class="mb-1">Assign Tasks</h5>
+                            <p class="mb-0 text-muted">Create and assign tasks to team members</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">3</div>
+                        <div>
+                            <h5 class="mb-1">Track Progress</h5>
+                            <p class="mb-0 text-muted">Monitor progress and achieve your goals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 mt-5 mt-lg-0">
+                    <img src="/api/placeholder/700/500" alt="How It Works" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">What Our Clients Say</h2>
+                <p class="mb-0 opacity-75">Don't just take our word for it. See what our users have to say about Whitepace.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Whitepace has revolutionized how our team collaborates. We've seen a 40% increase in productivity since implementation."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/48/48" alt="Author" class="rounded-circle">
+                            <div>
+                                <h5 class="mb-0">Sarah Johnson</h5>
+                                <p class="mb-0 opacity-75">Product Manager, Tech Co.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The intuitive interface and powerful features make Whitepace stand out from other project management tools we've used."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/48/48" alt="Author" class="rounded-circle">
+                            <div>
+                                <h5 class="mb-0">Michael Chen</h5>
+                                <p class="mb-0 opacity-75">CTO, Startup Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Our remote team stays connected and aligned thanks to Whitepace. It's become an essential part of our daily workflow."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/48/48" alt="Author" class="rounded-circle">
+                            <div>
+                                <h5 class="mb-0">Emily Rodriguez</h5>
+                                <p class="mb-0 opacity-75">Team Lead, Global Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Choose Your Plan</h2>
+                <p class="text-muted mb-0">We have plans for teams of all sizes. Find the right fit for your needs.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Basic</h3>
+                            <div class="pricing-price">$10<span class="pricing-period">/month</span></div>
+                        </div>
+                        <ul class="pricing-features list-unstyled">
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Up to 5 team members</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>5GB storage</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Basic task management</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Email support</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card pricing-popular">
+                        <div class="pricing-header">
+                            <span class="badge bg-primary mb-3">Most Popular</span>
+                            <h3 class="pricing-title">Professional</h3>
+                            <div class="pricing-price">$25<span class="pricing-period">/month</span></div>
+                        </div>
+                        <ul class="pricing-features list-unstyled">
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Up to 20 team members</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>20GB storage</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Advanced task management</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Priority support</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Analytics dashboard</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-primary w-100">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Enterprise</h3>
+                            <div class="pricing-price">$49<span class="pricing-period">/month</span></div>
+                        </div>
+                        <ul class="pricing-features list-unstyled">
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Unlimited team members</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>100GB storage</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Premium task management</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>24/7 dedicated support</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Advanced analytics & reporting</span>
+                            </li>
+                            <li class="pricing-feature">
+                                <i class="fas fa-check"></i>
+                                <span>Custom integrations</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary w-100">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="cta-title">Ready to Get Started?</h2>
+                    <p class="cta-text">Join thousands of teams using Whitepace to improve productivity and collaboration.</p>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <a href="#" class="btn btn-secondary me-3 mb-3">Try Whitepace Free</a>
+                        <a href="#" class="btn btn-outline-light mb-3">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="#" class="footer-brand">
+                        <img src="/api/placeholder/180/40" alt="Whitepace Logo">
+                    </a>
+                    <p class="footer-text">Whitepace is a project management software that helps teams collaborate, plan and organize their work.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2 mb-4 mb-lg-0">
+                    <h4 class="footer-title">Product</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Features</a></li>
+                        <li class="footer-link"><a href="#">Pricing</a></li>
+                        <li class="footer-link"><a href="#">Security</a></li>
+                        <li class="footer-link"><a href="#">Enterprise</a></li>
+                        <li class="footer-link"><a href="#">Customer Stories</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-lg-2 mb-4 mb-lg-0">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Help Center</a></li>
+                        <li class="footer-link"><a href="#">Guides</a></li>
+                        <li class="footer-link"><a href="#">Events</a></li>
+                        <li class="footer-link"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-lg-2 mb-4 mb-lg-0">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="#">Contact Us</a></li>
+                        <li class="footer-link"><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Terms of Service</a></li>
+                        <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="#">Cookie Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">© 2025 Whitepace. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Importation de médias{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        {% include "navbar.html.twig" %}
+
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">Importation de fichiers multimédias</h6>
+                            </div>
+                        </div>
+
+                        <div class="card-body px-4 pt-4 pb-3">
+                            <form id="import-media-form" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label class="form-label">Sélectionnez vos fichiers</label>
+                                        <div id="dropzone" class="border border-2 border-dashed border-secondary rounded p-5 text-center cursor-pointer">
+                                            <p class="mb-0 text-secondary">
+                                                Glissez-déposez vos fichiers ici ou cliquez pour sélectionner
+                                            </p>
+                                            <input type="file" id="media-files" name="mediaFiles[]" multiple accept="image/*,video/*,audio/*" class="d-none">
+                                        </div>
+                                        <small class="text-muted">Formats supportés : images, vidéos, audios. Taille max par fichier : 20MB</small>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="preview" style="display: none;">
+                                    <div class="col-12">
+                                        <label class="form-label">Aperçu</label>
+                                        <div class="d-flex flex-wrap gap-3" id="preview-list"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-12 text-end">
+                                        <a href="{{ path('app_docs') }}" class="btn btn-outline-secondary me-2">Annuler</a>
+                                        <button type="submit" class="btn bg-gradient-dark">Importer</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const input = document.getElementById('media-files');
+        const preview = document.getElementById('preview');
+        const previewList = document.getElementById('preview-list');
+
+        dropzone.addEventListener('click', () => input.click());
+
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropzone.classList.add('bg-light');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('bg-light');
+        });
+
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.classList.remove('bg-light');
+            input.files = e.dataTransfer.files;
+            displayPreview(input.files);
+        });
+
+        input.addEventListener('change', () => {
+            displayPreview(input.files);
+        });
+
+        function displayPreview(files) {
+            previewList.innerHTML = '';
+            if (files.length > 0) preview.style.display = 'block';
+
+            Array.from(files).forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'border rounded p-2 bg-white shadow-sm text-center';
+                item.style.width = '120px';
+
+                if (file.type.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.className = 'img-fluid rounded';
+                    img.style.maxHeight = '80px';
+                    const reader = new FileReader();
+                    reader.onload = () => img.src = reader.result;
+                    reader.readAsDataURL(file);
+                    item.appendChild(img);
+                } else {
+                    item.innerHTML = `<i class="material-icons text-secondary" style="font-size: 48px;">insert_drive_file</i><div class="small">${file.name}</div>`;
+                }
+
+                previewList.appendChild(item);
+            });
+        }
+
+        document.getElementById('import-media-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Importation simulée – à connecter avec un contrôleur Symfony 😉');
+        });
+    </script>
+{% endblock %}
+

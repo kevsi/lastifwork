@@ -1,0 +1,589 @@
+[2025/04/11 16:47:48.559] 
+##################################################################################
+############################## Ventoy2DiskX86  #############################
+##################################################################################
+[2025/04/11 16:47:48.559] Current Directory <Z:\home\alexanders\Images\ventoy-1.1.05-windows\ventoy-1.1.05>
+[2025/04/11 16:47:48.559] Exe file path <Z:\home\alexanders\Images\ventoy-1.1.05-windows\ventoy-1.1.05\Ventoy2Disk.exe>
+[2025/04/11 16:47:48.559] Current directory check OK.
+[2025/04/11 16:47:48.561] Current directory:<Z:\home\alexanders\Images\ventoy-1.1.05-windows\ventoy-1.1.05>
+[2025/04/11 16:47:48.562] ######### Current Ventoy Version: Ventoy2DiskX86 1.1.05 ########
+[2025/04/11 16:47:48.567] Failed to get parent process id for 556 0
+[2025/04/11 16:47:48.567] Control Flag: 0 1 1
+[2025/04/11 16:47:48.568] Windows Version: <<Windows 10 Ultimate N, 64-bit (Build 19043)>>
+[2025/04/11 16:47:48.569] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:47:48.571] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:47:48.572] GetPhysicalDriveCount: 0
+[2025/04/11 16:47:48.574] Logical Drives: 0x200031c
+[2025/04/11 16:47:48.576] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:48.577] C --> -1
+[2025/04/11 16:47:48.577] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:48.577] D --> -1
+[2025/04/11 16:47:48.578] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:48.578] E --> -1
+[2025/04/11 16:47:48.579] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:48.579] I --> -1
+[2025/04/11 16:47:48.580] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:48.580] J --> -1
+[2025/04/11 16:47:48.581] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:48.581] Z --> -1
+[2025/04/11 16:47:48.585] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:48.585] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:47:48.585] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:48.586] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:47:48.587] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:48.587] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:47:48.588] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:48.588] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:47:48.589] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:48.589] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:47:48.590] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:48.590] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:47:48.761] Load languages from json file ...
+[2025/04/11 16:47:48.764] language json file len:276765 json parse:0
+[2025/04/11 16:47:48.767] Total 51 languages ...
+[2025/04/11 16:47:48.917] Courier New font <C:\windows\Fonts\couri.ttf> does NOT exist.
+[2025/04/11 16:47:48.932] system_dir=<C:\windows\system32>
+[2025/04/11 16:47:48.933] sysnative_dir=<C:\windows\Sysnative>
+[2025/04/11 16:47:48.935] LoadLibrary shell32.dll.mui FAILED
+[2025/04/11 16:47:48.936] SetAlertPromptHook SUCCESS
+[2025/04/11 16:47:53.110] #### Now Refresh PhyDrive ####
+[2025/04/11 16:47:53.111] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:47:53.113] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:47:53.114] GetPhysicalDriveCount: 0
+[2025/04/11 16:47:53.116] Logical Drives: 0x200031c
+[2025/04/11 16:47:53.117] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:53.118] C --> -1
+[2025/04/11 16:47:53.118] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:53.118] D --> -1
+[2025/04/11 16:47:53.119] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:53.119] E --> -1
+[2025/04/11 16:47:53.119] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:53.120] I --> -1
+[2025/04/11 16:47:53.120] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:53.121] J --> -1
+[2025/04/11 16:47:53.121] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:53.122] Z --> -1
+[2025/04/11 16:47:53.125] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:53.126] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:47:53.126] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:53.126] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:47:53.127] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:53.127] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:47:53.128] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:53.128] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:47:53.129] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:53.129] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:47:53.129] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:53.130] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:47:53.308] #### Now Refresh PhyDrive ####
+[2025/04/11 16:47:53.309] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:47:53.312] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:47:53.313] GetPhysicalDriveCount: 0
+[2025/04/11 16:47:53.315] Logical Drives: 0x200031c
+[2025/04/11 16:47:53.316] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:53.317] C --> -1
+[2025/04/11 16:47:53.317] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:53.317] D --> -1
+[2025/04/11 16:47:53.318] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:53.318] E --> -1
+[2025/04/11 16:47:53.318] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:53.318] I --> -1
+[2025/04/11 16:47:53.319] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:53.319] J --> -1
+[2025/04/11 16:47:53.319] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:53.320] Z --> -1
+[2025/04/11 16:47:53.323] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:47:53.323] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:47:53.324] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:47:53.324] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:47:53.324] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:47:53.325] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:47:53.326] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:47:53.326] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:47:53.327] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:47:53.327] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:47:53.328] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:47:53.328] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:00.107] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:00.108] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:00.111] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:00.111] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:00.114] Logical Drives: 0x200031c
+[2025/04/11 16:48:00.115] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:00.116] C --> -1
+[2025/04/11 16:48:00.116] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:00.116] D --> -1
+[2025/04/11 16:48:00.117] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:00.117] E --> -1
+[2025/04/11 16:48:00.118] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:00.118] I --> -1
+[2025/04/11 16:48:00.119] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:00.119] J --> -1
+[2025/04/11 16:48:00.120] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:00.121] Z --> -1
+[2025/04/11 16:48:00.125] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:00.125] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:00.125] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:00.126] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:00.126] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:00.126] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:00.127] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:00.127] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:00.127] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:00.127] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:00.128] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:00.128] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:00.877] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:00.878] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:00.880] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:00.881] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:00.883] Logical Drives: 0x200031c
+[2025/04/11 16:48:00.884] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:00.885] C --> -1
+[2025/04/11 16:48:00.885] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:00.886] D --> -1
+[2025/04/11 16:48:00.886] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:00.886] E --> -1
+[2025/04/11 16:48:00.887] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:00.887] I --> -1
+[2025/04/11 16:48:00.888] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:00.888] J --> -1
+[2025/04/11 16:48:00.889] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:00.889] Z --> -1
+[2025/04/11 16:48:00.892] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:00.892] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:00.893] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:00.893] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:00.893] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:00.893] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:00.894] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:00.894] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:00.895] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:00.895] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:00.895] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:00.896] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:01.057] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:01.058] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:01.061] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:01.061] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:01.063] Logical Drives: 0x200031c
+[2025/04/11 16:48:01.065] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.065] C --> -1
+[2025/04/11 16:48:01.066] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.066] D --> -1
+[2025/04/11 16:48:01.066] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.067] E --> -1
+[2025/04/11 16:48:01.067] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.068] I --> -1
+[2025/04/11 16:48:01.069] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.069] J --> -1
+[2025/04/11 16:48:01.069] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.070] Z --> -1
+[2025/04/11 16:48:01.073] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.074] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:01.074] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.074] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:01.075] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.075] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:01.075] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.076] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:01.076] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.077] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:01.077] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.077] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:01.255] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:01.256] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:01.259] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:01.259] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:01.261] Logical Drives: 0x200031c
+[2025/04/11 16:48:01.262] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.263] C --> -1
+[2025/04/11 16:48:01.263] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.263] D --> -1
+[2025/04/11 16:48:01.264] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.264] E --> -1
+[2025/04/11 16:48:01.264] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.265] I --> -1
+[2025/04/11 16:48:01.265] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.265] J --> -1
+[2025/04/11 16:48:01.266] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.266] Z --> -1
+[2025/04/11 16:48:01.270] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.270] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:01.270] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.271] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:01.271] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.271] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:01.272] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.272] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:01.272] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.273] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:01.273] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.273] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:01.445] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:01.446] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:01.449] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:01.449] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:01.452] Logical Drives: 0x200031c
+[2025/04/11 16:48:01.453] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.453] C --> -1
+[2025/04/11 16:48:01.454] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.454] D --> -1
+[2025/04/11 16:48:01.454] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.455] E --> -1
+[2025/04/11 16:48:01.455] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.455] I --> -1
+[2025/04/11 16:48:01.456] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.456] J --> -1
+[2025/04/11 16:48:01.457] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.457] Z --> -1
+[2025/04/11 16:48:01.461] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:01.461] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:01.461] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:01.462] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:01.462] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:01.463] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:01.463] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:01.463] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:01.464] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:01.464] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:01.465] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:01.465] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:17.100] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:17.101] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:17.105] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:17.105] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:17.110] Logical Drives: 0x200031c
+[2025/04/11 16:48:17.113] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.114] C --> -1
+[2025/04/11 16:48:17.116] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.116] D --> -1
+[2025/04/11 16:48:17.117] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.118] E --> -1
+[2025/04/11 16:48:17.118] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.118] I --> -1
+[2025/04/11 16:48:17.119] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.120] J --> -1
+[2025/04/11 16:48:17.120] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.121] Z --> -1
+[2025/04/11 16:48:17.129] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.129] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:17.131] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.131] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:17.133] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.134] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:17.134] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.136] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:17.136] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.137] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:17.137] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.139] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:17.587] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:17.588] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:17.590] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:17.591] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:17.596] Logical Drives: 0x200031c
+[2025/04/11 16:48:17.597] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.597] C --> -1
+[2025/04/11 16:48:17.598] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.599] D --> -1
+[2025/04/11 16:48:17.599] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.599] E --> -1
+[2025/04/11 16:48:17.599] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.600] I --> -1
+[2025/04/11 16:48:17.601] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.601] J --> -1
+[2025/04/11 16:48:17.602] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.602] Z --> -1
+[2025/04/11 16:48:17.614] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.614] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:17.616] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.616] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:17.617] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.618] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:17.618] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.619] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:17.620] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.621] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:17.621] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.622] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:17.800] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:17.801] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:17.803] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:17.804] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:17.806] Logical Drives: 0x200031c
+[2025/04/11 16:48:17.808] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.808] C --> -1
+[2025/04/11 16:48:17.809] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.810] D --> -1
+[2025/04/11 16:48:17.811] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.811] E --> -1
+[2025/04/11 16:48:17.812] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.813] I --> -1
+[2025/04/11 16:48:17.814] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.814] J --> -1
+[2025/04/11 16:48:17.815] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.815] Z --> -1
+[2025/04/11 16:48:17.819] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:17.820] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:17.820] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:17.821] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:17.821] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:17.822] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:17.822] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:17.823] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:17.823] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:17.824] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:17.824] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:17.824] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:18.005] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:18.006] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:18.009] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:18.009] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:18.012] Logical Drives: 0x200031c
+[2025/04/11 16:48:18.013] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.013] C --> -1
+[2025/04/11 16:48:18.014] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.015] D --> -1
+[2025/04/11 16:48:18.015] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.016] E --> -1
+[2025/04/11 16:48:18.016] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.017] I --> -1
+[2025/04/11 16:48:18.017] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.017] J --> -1
+[2025/04/11 16:48:18.018] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.018] Z --> -1
+[2025/04/11 16:48:18.022] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.022] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:18.022] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.022] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:18.023] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.023] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:18.024] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.024] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:18.024] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.024] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:18.025] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.025] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:18.204] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:18.204] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:18.207] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:18.207] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:18.209] Logical Drives: 0x200031c
+[2025/04/11 16:48:18.211] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.211] C --> -1
+[2025/04/11 16:48:18.211] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.211] D --> -1
+[2025/04/11 16:48:18.212] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.212] E --> -1
+[2025/04/11 16:48:18.213] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.213] I --> -1
+[2025/04/11 16:48:18.214] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.214] J --> -1
+[2025/04/11 16:48:18.215] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.215] Z --> -1
+[2025/04/11 16:48:18.219] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.219] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:18.219] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.220] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:18.220] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.221] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:18.221] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.221] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:18.222] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.223] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:18.223] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.224] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:18.516] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:18.517] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:18.520] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:18.520] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:18.522] Logical Drives: 0x200031c
+[2025/04/11 16:48:18.524] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.524] C --> -1
+[2025/04/11 16:48:18.525] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.525] D --> -1
+[2025/04/11 16:48:18.525] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.526] E --> -1
+[2025/04/11 16:48:18.526] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.527] I --> -1
+[2025/04/11 16:48:18.527] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.527] J --> -1
+[2025/04/11 16:48:18.528] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.528] Z --> -1
+[2025/04/11 16:48:18.532] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:18.532] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:18.533] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:18.533] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:18.533] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:18.534] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:18.534] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:18.535] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:18.535] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:18.535] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:18.536] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:18.536] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:19.634] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:19.635] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:19.638] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:19.638] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:19.640] Logical Drives: 0x200031c
+[2025/04/11 16:48:19.642] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:19.642] C --> -1
+[2025/04/11 16:48:19.642] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:19.643] D --> -1
+[2025/04/11 16:48:19.643] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:19.644] E --> -1
+[2025/04/11 16:48:19.644] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:19.644] I --> -1
+[2025/04/11 16:48:19.645] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:19.645] J --> -1
+[2025/04/11 16:48:19.645] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:19.646] Z --> -1
+[2025/04/11 16:48:19.649] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:19.649] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:19.650] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:19.650] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:19.651] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:19.651] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:19.651] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:19.652] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:19.653] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:19.653] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:19.653] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:19.654] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:21.246] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:21.247] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:21.250] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:21.250] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:21.253] Logical Drives: 0x200031c
+[2025/04/11 16:48:21.254] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.254] C --> -1
+[2025/04/11 16:48:21.255] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.255] D --> -1
+[2025/04/11 16:48:21.256] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.256] E --> -1
+[2025/04/11 16:48:21.256] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.257] I --> -1
+[2025/04/11 16:48:21.257] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.257] J --> -1
+[2025/04/11 16:48:21.258] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.258] Z --> -1
+[2025/04/11 16:48:21.262] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.262] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:21.262] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.262] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:21.263] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.264] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:21.264] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.264] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:21.265] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.265] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:21.265] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.266] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:21.503] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:21.503] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:21.506] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:21.506] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:21.509] Logical Drives: 0x200031c
+[2025/04/11 16:48:21.510] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.510] C --> -1
+[2025/04/11 16:48:21.511] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.511] D --> -1
+[2025/04/11 16:48:21.512] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.512] E --> -1
+[2025/04/11 16:48:21.512] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.512] I --> -1
+[2025/04/11 16:48:21.513] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.513] J --> -1
+[2025/04/11 16:48:21.514] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.514] Z --> -1
+[2025/04/11 16:48:21.517] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.518] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:21.519] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.519] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:21.519] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.520] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:21.520] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.521] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:21.521] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.521] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:21.522] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.523] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:21.762] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:21.763] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:21.766] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:21.766] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:21.769] Logical Drives: 0x200031c
+[2025/04/11 16:48:21.770] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.771] C --> -1
+[2025/04/11 16:48:21.771] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.771] D --> -1
+[2025/04/11 16:48:21.771] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.772] E --> -1
+[2025/04/11 16:48:21.772] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.772] I --> -1
+[2025/04/11 16:48:21.773] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.773] J --> -1
+[2025/04/11 16:48:21.774] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.774] Z --> -1
+[2025/04/11 16:48:21.778] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:21.778] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:21.778] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:21.778] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:21.779] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:21.779] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:21.780] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:21.780] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:21.780] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:21.781] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:21.781] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:21.781] Logical Drive:Z  ===> PhyDrive:-1
+[2025/04/11 16:48:29.544] #### Now Refresh PhyDrive ####
+[2025/04/11 16:48:29.545] 
+===================== Enum All PhyDrives =====================
+[2025/04/11 16:48:29.547] RegOpenKeyExA <SYSTEM\CurrentControlSet\Services\disk\Enum> Ret:2
+[2025/04/11 16:48:29.547] GetPhysicalDriveCount: 0
+[2025/04/11 16:48:29.553] Logical Drives: 0x200031c
+[2025/04/11 16:48:29.555] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:29.555] C --> -1
+[2025/04/11 16:48:29.556] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:29.556] D --> -1
+[2025/04/11 16:48:29.558] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:29.560] E --> -1
+[2025/04/11 16:48:29.560] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:29.560] I --> -1
+[2025/04/11 16:48:29.561] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:29.561] J --> -1
+[2025/04/11 16:48:29.562] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:29.562] Z --> -1
+[2025/04/11 16:48:29.573] DeviceIoControl IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS failed \\.\C:, error:0
+[2025/04/11 16:48:29.573] Logical Drive:C  ===> PhyDrive:-1
+[2025/04/11 16:48:29.574] Could not open the disk<\\.\D:>, error:5
+[2025/04/11 16:48:29.574] Logical Drive:D  ===> PhyDrive:-1
+[2025/04/11 16:48:29.575] Could not open the disk<\\.\E:>, error:5
+[2025/04/11 16:48:29.575] Logical Drive:E  ===> PhyDrive:-1
+[2025/04/11 16:48:29.576] Could not open the disk<\\.\I:>, error:5
+[2025/04/11 16:48:29.576] Logical Drive:I  ===> PhyDrive:-1
+[2025/04/11 16:48:29.577] Could not open the disk<\\.\J:>, error:5
+[2025/04/11 16:48:29.578] Logical Drive:J  ===> PhyDrive:-1
+[2025/04/11 16:48:29.578] Could not open the disk<\\.\Z:>, error:5
+[2025/04/11 16:48:29.579] Logical Drive:Z  ===> PhyDrive:-1

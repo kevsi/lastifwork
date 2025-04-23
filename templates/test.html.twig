@@ -1,0 +1,156 @@
+{# templates/admin/users/index.html.twig #}
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Utilisateurs connectés ({{ onlineUsers|length }})</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Utilisateur</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rôle</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dernière activité</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Statut</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in onlineUsers %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="{{ asset('assets/img/avatars/default.jpg') }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ user.fullName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ user.email }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {% for role in user.roles %}
+                                                <span class="badge bg-gradient-info">{{ role|replace({'ROLE_': '', '_': ' '}) }}</span>
+                                            {% endfor %}
+                                        </p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">{{ user.lastActivityAt|date('d/m/Y H:i') }}</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">En ligne</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Voir l'utilisateur">
+                                            <i class="material-icons">visibility</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 d-flex justify-content-between">
+                        <h6 class="text-white text-capitalize ps-3">Tous les utilisateurs ({{ users|length }})</h6>
+                        <a href="#" class="btn btn-sm bg-gradient-dark mb-0 me-3">
+                            <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Ajouter
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Utilisateur</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rôle</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date d'inscription</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Statut</th>
+                                    <th class="text-secondary opacity-7">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="{{ asset('assets/img/avatars/default.jpg') }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ user.fullName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ user.email }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {% for role in user.roles %}
+                                                <span class="badge bg-gradient-{{ role == 'ROLE_ADMIN' ? 'warning' : 'info' }}">{{ role|replace({'ROLE_': '', '_': ' '}) }}</span>
+                                            {% endfor %}
+                                        </p>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">{{ user.createdAt|date('d/m/Y') }}</span>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        {% if user in onlineUsers %}
+                                            <span class="badge badge-sm bg-gradient-success">En ligne</span>
+                                        {% else %}
+                                            <span class="badge badge-sm bg-gradient-secondary">Hors ligne</span>
+                                        {% endif %}
+                                        
+                                        {% if user.isActive %}
+                                            <span class="badge badge-sm bg-gradient-info">Actif</span>
+                                        {% else %}
+                                            <span class="badge badge-sm bg-gradient-danger">Inactif</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="d-flex">
+                                            <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="btn btn-link text-info px-1 mb-0" data-toggle="tooltip" title="Voir">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
+                                            <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-link text-warning px-1 mb-0" data-toggle="tooltip" title="Éditer">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                            <form method="post" action="{{ path('admin_user_toggle_status', {'id': user.id}) }}" class="d-inline">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('toggle' ~ user.id) }}">
+                                                <button type="submit" class="btn btn-link text-{{ user.isActive ? 'danger' : 'success' }} px-1 mb-0" data-toggle="tooltip" title="{{ user.isActive ? 'Désactiver' : 'Activer' }}">
+                                                    <i class="material-icons">{{ user.isActive ? 'person_off' : 'how_to_reg' }}</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

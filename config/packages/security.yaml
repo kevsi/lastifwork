@@ -1,0 +1,58 @@
+security:
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    # API avec JWT pour les accès programmatiques
+    api_login:
+      pattern: ^/api/login
+      stateless: true
+      json_login:
+        check_path: /api/login_check
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+    api:
+      pattern: ^/api
+      stateless: true
+      jwt: ~
+
+    # Interface web traditionnelle avec sessions
+    main:
+      lazy: true
+      provider: app_user_provider
+      form_login:
+        login_path: app_login
+        check_path: app_login
+        enable_csrf: true
+        default_target_path: app_dashboard
+      logout:
+        path: app_logout
+        target: app_login
+
+  access_control:
+    # API routes
+    - { path: ^/api/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
+    # Web routes
+    - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/register, roles: PUBLIC_ACCESS }
+    - { path: ^/home, roles: PUBLIC_ACCESS }
+    - { path: ^/categories, roles: PUBLIC_USER }
+    - { path: ^/discussions, roles: PUBLIC_USER }
+    - { path: ^/documents, roles: PUBLIC_USER }
+    - { path: ^/multimedias, roles: PUBLIC_USER }
+    - { path: ^/notifications, roles: PUBLIC_USER }
+    - { path: ^/profile, roles: PUBLIC_USER }
+    - { path: ^/workspace, roles: PUBLIC_USER }
