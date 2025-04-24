@@ -14,69 +14,139 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[Route('/categories')]
 class CategoriesController extends AbstractController
 {
-    #[Route("/categories", name: "app_categories")]
+    /**
+     * Liste des catégories (vue administrateur)
+     */
+    #[Route('', name: 'app_categories', methods: ['GET'])]
     public function index(
         CategoryRepository $categoryRepository,
         DocumentRepository $documentRepository
     ): Response {
-        $categories = $categoryRepository->findAll();
+        // Récupérer les catégories racines (sans parent)
+        $rootCategories = $categoryRepository->findBy(['parent' => null]);
 
-        // Calculer le nombre de documents par catégorie
+    // Charge récursivement les enfants
+        $categoryRepository->loadChildCategories($rootCategories);
+        
+        // Calculer le nombre de documents par catégorie pour toutes les catégories
+        $categories = $categoryRepository->findAll();
         $filesCounts = [];
         foreach ($categories as $category) {
-            $filesCounts[
-                $category->getId()
-            ] = $documentRepository->countByCategory($category);
+            $filesCounts[$category->getId()] = $documentRepository->countByCategory($category);
         }
-
-        return $this->render("categories/index.html.twig", [
-            "categories" => $categories,
-            "filesCounts" => $filesCounts,
-            "statusOptions" => CategoryStatus::cases(),
+        
+        return $this->render('category/index.html.twig', [
+            'root_categories' => $rootCategories,
+            'subcategories' => $rootCategories,
+            'documents' => [],
+            'categories' => $categories,
+            'filesCounts' => $filesCounts,
+            'statusOptions' => CategoryStatus::cases(),
         ]);
     }
+    
+    /**
+     * Afficher une catégorie spécifique (explorateur)
+     */
+    #[Route('/{id}', name: 'app_category_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function show(
+        int $id, 
+        CategoryRepository $categoryRepository, 
+        DocumentRepository $documentRepository
+    ): Response {
+        // Récupérer la catégorie actuelle
+        $category = $categoryRepository->find($id);
+        
+        if (!$category) {
+            throw $this->createNotFoundException('Catégorie non trouvée');
+        }
+        
+        // Récupérer les catégories racines (pour le menu latéral)
+        $rootCategories = $categoryRepository->findBy(['parent' => null]);
+        $categoryRepository->loadChildCategories($rootCategories);
+        
+        // Récupérer les sous-catégories de la catégorie actuelle
+        $subcategories = $categoryRepository->findBy(['parent' => $category]);
+        
+        // Récupérer les documents de la catégorie actuelle
+        $documents = $documentRepository->findBy(['category' => $category]);
+        
+        // Construire le chemin (fil d'Ariane)
+        $path = $categoryRepository->buildCategoryPath($category);
 
-    #[Route("/categories/new", name: "app_categories_create")]
+        
+        return $this->render('category/index.html.twig', [
+            'root_categories' => $rootCategories,
+            'current_category' => $category,
+            'subcategories' => $subcategories,
+            'documents' => $documents,
+            'current_path' => $path,
+            'root_categories' => $rootCategories,
+            'statusOptions' => CategoryStatus::cases(), // Ajoutez cette ligne
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+    
+    /**
+     * Créer une nouvelle catégorie
+     */
+    /**
+ * Créer une nouvelle catégorie
+ */
+    #[Route('/new', name: 'app_categories_create', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
         EntityManagerInterface $entityManager,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        CategoryRepository $categoryRepository
     ): Response {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
+    
+    // Récupérer le parent_id s'il existe dans la requête
+    $parentId = $request->query->get('parent_id');
+    if ($parentId) {
+        $parentCategory = $categoryRepository->find($parentId);
+        if ($parentCategory) {
+            $category->setParent($parentCategory);
+        }
+    }
+    
+    $form = $this->createForm(CategoryType::class, $category);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Si le slug n'est pas fourni, le générer automatiquement
-            if (empty($category->getSlug())) {
-                $slug = $slugger->slug($category->getName())->lower();
-                $category->setSlug($slug);
-            }
-
-            // Les dates sont déjà gérées dans le constructeur et les callbacks d'entité
-
-            $entityManager->persist($category);
-            $entityManager->flush();
-
-            $this->addFlash("success", "Catégorie créée avec succès");
-
-            return $this->redirectToRoute("app_categories");
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Si le slug n'est pas fourni, le générer automatiquement
+        if (empty($category->getSlug())) {
+            $slug = $slugger->slug($category->getName())->lower();
+            $category->setSlug($slug);
         }
 
-        return $this->render("categories/create.html.twig", [
-            "form" => $form->createView(),
-        ]);
+        $entityManager->persist($category);
+        $entityManager->flush();
+
+        $this->addFlash("success", "Catégorie créée avec succès");
+
+        // Rediriger vers la catégorie parente si elle existe
+        if ($parentId) {
+            return $this->redirectToRoute("app_category_show", ['id' => $parentId]);
+        }
+        
+        return $this->redirectToRoute("app_categories");
     }
 
-    #[
-        Route(
-            "/categories/{id}/edit",
-            name: "app_category_edit",
-            methods: ["GET", "POST"]
-        )
-    ]
+    return $this->render("category/create.html.twig", [
+        "form" => $form->createView(),
+        "parent_id" => $parentId,
+    ]);
+    }
+
+    /**
+     * Modifier une catégorie
+     */
+    #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         Category $category,
@@ -103,24 +173,21 @@ class CategoriesController extends AbstractController
             return $this->redirectToRoute("app_categories");
         }
 
-        return $this->render("categories/edit.html.twig", [
+        return $this->render("category/edit.html.twig", [
             "category" => $category,
             "form" => $form->createView(),
             "filesCount" => $filesCount,
         ]);
     }
 
-    #[
-        Route(
-            "/categories/{id}/delete",
-            name: "app_category_delete",
-            methods: ["POST"]
-        )
-    ]
+    /**
+     * Supprimer une catégorie
+     */
+    #[Route('/{id}/delete', name: 'app_category_delete', methods: ['POST'])]
     public function delete(
         Request $request,
         Category $category,
-        EntityManagerInterface $em
+        EntityManagerInterface $entityManager
     ): Response {
         if (
             $this->isCsrfTokenValid(
@@ -128,8 +195,8 @@ class CategoriesController extends AbstractController
                 $request->request->get("_token")
             )
         ) {
-            $em->remove($category);
-            $em->flush();
+            $entityManager->remove($category);
+            $entityManager->flush();
             $this->addFlash("success", "Catégorie supprimée avec succès.");
         } else {
             $this->addFlash(
@@ -140,4 +207,6 @@ class CategoriesController extends AbstractController
 
         return $this->redirectToRoute("app_categories");
     }
+    
+   
 }

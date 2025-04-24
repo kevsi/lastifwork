@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\CategoryStatus;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -29,12 +30,25 @@ class Category
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
+    #[ORM\Column(type:"string", length:10, unique:true)]
+    private $code;
+
+    #[ORM\Column(type: 'string', enumType: CategoryStatus::class)]
+    private ?CategoryStatus $status = null;
+    
+    
+    #[ORM\Column(type:"string", length:20, nullable:true)]
+    private $color;
+
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
     #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
     private ?self $parent = null;
 
+    /**
+    * @var Collection|Category[]
+    */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
-    private Collection $children;
+    private $children;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -53,12 +67,12 @@ class Category
 
     public function __construct()
     {
-        $this->children = new ArrayCollection();
         $this->discussions = new ArrayCollection();
         $this->documents = new ArrayCollection();
         $this->multimedias = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->children = new ArrayCollection();
     }
 
     #[ORM\PreUpdate]
@@ -105,12 +119,7 @@ class Category
         return $this;
     }
 
-    #[ORM\Column(type: 'string', enumType: CategoryStatus::class)]
-    private ?CategoryStatus $status = null;
     
-    
-    #[ORM\Column(type:"string", length:20, nullable:true)]
-    private $color;
 
 
     public function getParent(): ?self
@@ -132,27 +141,6 @@ class Category
         return $this->children;
     }
 
-    public function addChild(self $child): static
-    {
-        if (!$this->children->contains($child)) {
-            $this->children->add($child);
-            $child->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChild(self $child): static
-    {
-        if ($this->children->removeElement($child)) {
-            // set the owning side to null (unless already changed)
-            if ($child->getParent() === $this) {
-                $child->setParent(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -243,4 +231,62 @@ class Category
         $this->color = $color;
         return $this;
     }
+
+    public function getCode(): ?string
+    {   
+        return $this->code;
+    }
+
+    public function setCode(?string $code): self
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+
+    public function addChild(Category $child): self
+    {
+        if (!$this->children->contains($child)) {
+        $this->children[] = $child;
+        $child->setParent($this);
+    }
+        return $this;
+    }
+
+    public function removeChild(Category $child): self
+    {
+        if ($this->children->removeElement($child)) {
+        // set the owning side to null
+            if ($child->getParent() === $this) {
+            $child->setParent(null);
+        }
+    }
+        return $this;
+    }
+
+
+    /**
+ * @ORM\PrePersist
+ * @ORM\PreUpdate
+ */
+        #[ORM\PrePersist]
+        #[ORM\PreUpdate]
+        public function generateCode()
+        {
+            if (empty($this->code)) {
+            // Prendre les 3 premiers caractères du nom en majuscules
+            $baseCode = substr(strtoupper(trim($this->name)), 0, 3);
+                
+            // Enlever les caractères spéciaux/accents
+            $slugger = new AsciiSlugger();
+            $baseCode = $slugger->slug($baseCode, '')->toString();
+                
+            // Si c'est une sous-catégorie, préfixer avec le code parent
+            if ($this->parent) {
+                $this->code = $this->parent->getCode() . '-' . $baseCode;
+            } else {
+                $this->code = $baseCode;
+            }
+        }
+        }
 }

@@ -1,31 +1,27 @@
+import '~jquery';
+
+import '@popperjs/core/dist/umd/popper.min.js';
+import '~bootstrap/dist/js/bootstrap.bundle.min.js'; // Inclut Popper.js
+import '~material-dashboard/assets/js/material-dashboard.min.js';
+import './material.init.js';
+
+
 import './bootstrap.js';
 import "./styles/app.css";
-// Bootstrap 5 (JS + CSS)
 import '~bootstrap/dist/css/bootstrap.min.css';
-import '~bootstrap/dist/js/bootstrap.bundle.min.js'; // Inclut Popper.js
 
-// Material Dashboard (JS + CSS)
 import '~material-dashboard/assets/css/material-dashboard.min.css';
-import '~material-dashboard/assets/js/material-dashboard.min.js';
 
-// Bootstrap Notify (pour les notifications)
 import 'bootstrap-notify';
 
-// Perfect Scrollbar (pour les barres de défilement custom)
 import '~perfect-scrollbar/dist/perfect-scrollbar.min.js';
 import '~perfect-scrollbar/css/perfect-scrollbar.min.css';
 
-// Chart.js (pour les graphiques)
-import { Chart } from 'chart.js/auto'; 
-
-// CountUp.js (pour les animations de comptage)
-import { CountUp } from '~countup.js';
 
 // Material Icons (police Google)
 import '~material-icons/iconfont/material-icons.css';
 
-//Popper js 
-import '@popperjs/core/dist/umd/popper.min.js';
+
 // assets/app.js
 import { start } from '@hotwired/turbo'
 

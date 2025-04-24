@@ -29,6 +29,39 @@ class CategoryRepository extends ServiceEntityRepository
     return $stmt->executeStatement();
     }
 
+     /**
+     * Charge récursivement les enfants des catégories
+     */
+    public function loadChildCategories(array $categories): void
+    {
+        foreach ($categories as $category) {
+            $children = $category->getChildren(); // Doctrine gère ça
+
+            if (!$children->isEmpty()) {
+            // Appel récursif
+            $this->loadChildCategories($children->toArray());
+            }
+        }
+    }
+
+    
+    /**
+     * Construit le chemin de la catégorie (pour le fil d'Ariane)
+     */
+    public function buildCategoryPath(Category $category): array
+    {
+        $path = [$category];
+        $current = $category;
+        
+        // Remonter l'arborescence des parents
+        while ($parent = $current->getParent()) {
+            array_unshift($path, $parent);
+            $current = $parent;
+        }
+        
+        return $path;
+    }
+
 
     //    /**
     //     * @return Category[] Returns an array of Category objects

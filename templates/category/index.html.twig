@@ -1,0 +1,563 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories - Système de Gestion Documentaire{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        {# Inclure la barre de navigation #}
+        {% include "navbar.html.twig" %}
+        
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        {# En-tête de la carte #}
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                                <h6 class="text-white text-capitalize ps-3">
+                                    {# Fil d'Ariane pour la navigation hiérarchique #}
+                                    <div class="breadcrumb text-dark mb-0">
+                                        <a href="{{ path('app_categories') }}" class="text-dark text-decoration-none">Catégories</a>
+                                        {% if current_category is defined %}
+                                            <span class="mx-2">/</span>
+                                            {% if current_category.parent %}
+                                                <a href="{{ path('app_category_show', {'id': current_category.parent.id}) }}" class="text-dark text-decoration-none ">{{ current_category.parent.name }}</a>
+                                                <span class="mx-2">/</span>
+                                            {% endif %}
+                                            <span>{{ current_category.name }}</span>
+                                        {% endif %}
+                                    </div>
+                                </h6>
+                                <div class="pe-3">
+                                    {% if current_category is defined %}
+                                        <a href="{{ path('app_categories_create', {'parent_id': current_category.id}) }}" class="btn btn-sm btn-white me-2">Ajouter sous-catégorie</a>
+                                        <a href="{{ path('app_docs_create', {'category_id': current_category.id}) }}" class="btn btn-sm btn-primary">Ajouter document</a>
+                                        {% else %}
+                                            <a href="{{ path('app_categories_create') }}" class="btn btn-sm btn-white">Ajouter catégorie</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {# Corps de la carte avec filtre et recherche #}
+                        <div class="card-body px-3 pt-3 pb-2">
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-outline">
+                                        <label class="form-label">Rechercher...</label>
+                                        <input type="text" class="form-control" id="search-categories">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <!-- Boutons pour basculer entre les vues -->
+                                    <div class="btn-group me-2" role="group" aria-label="Mode d'affichage">
+                                        <button type="button" class="btn btn-sm btn-outline-dark active" id="tableViewBtn">
+                                            <i class="material-icons">view_list</i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-dark" id="gridViewBtn">
+                                            <i class="material-icons">grid_view</i>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Sélecteur de contenu affiché -->
+                                    <div class="btn-group me-2" role="group" aria-label="Type de contenu">
+                                        <button type="button" class="btn btn-sm btn-outline-dark active" id="showAllBtn">
+                                            Tout
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-dark" id="showCategoriesBtn">
+                                            Catégories
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-dark" id="showDocumentsBtn">
+                                            Documents
+                                        </button>
+                                    </div>
+                                    
+                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Filtrer par
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Date (récent)</a></li>
+                                        <li><a class="dropdown-item" href="#">Date (ancien)</a></li>
+                                        <li><a class="dropdown-item" href="#">Nom (A-Z)</a></li>
+                                        <li><a class="dropdown-item" href="#">Status</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            {# Information sur la catégorie actuelle si définie #}
+                            {% if current_category is defined %}
+                                <div class="alert mb-4 bg-gradient-dark shadow-dark border-radius-lg ">
+                                    <div class="d-flex">
+                                        <div class="me-3">
+                                            <i class="material-icons opacity-10" style="font-size: 2rem;">category</i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1 text-white">{{ current_category.name }}</h5>
+                                            <p class="mb-0">{{ current_category.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Vue en tableau (visible par défaut) -->
+                            <div id="tableView">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Slug</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date de création</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {# Sous-catégories #}
+                                            {% for category in subcategories %}
+                                                <tr class="category-item">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-xs text-secondary mb-0">{{ category.id }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="me-3 d-flex align-items-center">
+                                                                <span class="material-icons text-info">folder</span>
+                                                            </div>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a href="{{ path('app_category_show', {'id': category.id}) }}" class="text-decoration-none">
+                                                                        {{ category.name }}
+                                                                    </a>
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">Catégorie</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">{{ category.description }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <p class="text-xs font-weight-bold mb-0">{{ category.slug }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span class="text-secondary text-xs font-weight-bold">{{ category.createdAt|date('Y-m-d') }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span class="badge badge-sm bg-gradient-{{ category.status ? 'success' : 'danger' }}">
+                                                            {{ category.status ? 'Actif' : 'Inactif' }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <div class="btn-group" role="group">
+                                                            <a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Voir">
+                                                                <i class="material-icons">visibility</i>
+                                                            </a>
+                                                            <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                                <i class="material-icons">edit</i>
+                                                            </a>
+                                                            <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Supprimer">
+                                                                <i class="material-icons">delete</i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            
+                                            {# Documents dans la catégorie actuelle #}
+                                            {% for document in documents %}
+                                                <tr class="document-item">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-xs text-secondary mb-0">{{ document.id }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="me-3 d-flex align-items-center">
+                                                                <span class="material-icons text-info">description</span>
+                                                            </div>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a href="{{ path('app_docs_show', {'id': document.id}) }}" class="text-decoration-none">
+                                                                        {{ document.title }}
+                                                                    </a>
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">Document</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">{{ document.description }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <p class="text-xs font-weight-bold mb-0">{{ document.slug }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span class="text-secondary text-xs font-weight-bold">{{ document.createdAt|date('Y-m-d') }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span class="badge badge-sm bg-gradient-{{ document.status ? 'success' : 'danger' }}">
+                                                            {{ document.status ? 'Actif' : 'Archivé' }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <div class="btn-group" role="group">
+                                                            <a href="{{ path('app_docs_show', {'id': document.id}) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Voir">
+                                                                <i class="material-icons">visibility</i>
+                                                            </a>
+                                                            <a href="{{ path('app_docs_download', {'id': document.id}) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Télécharger">
+                                                                <i class="material-icons">download</i>
+                                                            </a>
+                                                            <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                                <i class="material-icons">edit</i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Vue en grille (cachée par défaut) -->
+                            <div id="gridView" style="display: none;">
+                                <div class="row">
+                                    {# Sous-catégories en vue grille #}
+                                    {% for category in subcategories %}
+                                        <div class="col-md-4 col-lg-3 mb-4 category-item">
+                                            <div class="card h-100">
+                                                <div class="card-header p-3" style="background-color: #4fc3f720;">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="icon-category me-3">
+                                                            <i class="material-icons text-info opacity-10" style="font-size: 2.5rem;">folder</i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-sm">
+                                                                <a href="{{ path('app_category_show', {'id': category.id}) }}" class="text-decoration-none">
+                                                                    {{ category.name }}
+                                                                </a>
+                                                            </h6>
+                                                            <p class="text-xs text-secondary mb-0">ID: {{ category.id }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body py-2">
+                                                    <div class="mb-2">
+                                                        <span class="badge badge-sm bg-gradient-{{ category.status ? 'success' : 'danger' }}">
+                                                            {{ category.status ? 'Actif' : 'Inactif' }}
+                                                        </span>
+                                                        <span class="badge badge-sm bg-gradient-dark ms-1">Catégorie</span>
+                                                    </div>
+                                                    <p class="text-xs text-secondary mb-2">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">description</i>
+                                                        {{ category.description }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-1">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">link</i>
+                                                        {{ category.slug }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">calendar_today</i>
+                                                        Créé le {{ category.createdAt|date('Y-m-d') }} | Modifié le {{ category.updatedAt|date('Y-m-d') }}
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer p-2">
+                                                    <div class="btn-group w-100" role="group">
+                                                        <a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Voir">
+                                                            <i class="material-icons">visibility</i>
+                                                        </a>
+                                                        <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                            <i class="material-icons">edit</i>
+                                                        </a>
+                                                        <a href="{{ path('app_category_delete', {'id': category.id}) }}" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Supprimer">
+                                                            <i class="material-icons">delete</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    {# Documents en vue grille #}
+                                    {% for document in documents %}
+                                        <div class="col-md-4 col-lg-3 mb-4 document-item">
+                                            <div class="card h-100">
+                                                <div class="card-header p-3" style="background-color: #4fc3f720;">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="icon-document me-3">
+                                                            <i class="material-icons text-info opacity-10" style="font-size: 2.5rem;">description</i>
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-0 text-sm">
+                                                                <a href="{{ path('app_docs_show', {'id': document.id}) }}" class="text-decoration-none">
+                                                                    {{ document.title }}
+                                                                </a>
+                                                            </h6>
+                                                            <p class="text-xs text-secondary mb-0">ID: {{ document.id }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body py-2">
+                                                    <div class="mb-2">
+                                                        <span class="badge badge-sm bg-gradient-{{ document.status ? 'success' : 'danger' }}">
+                                                            {{ document.status ? 'Actif' : 'Archivé' }}
+                                                        </span>
+                                                        <span class="badge badge-sm bg-gradient-info ms-1">Document</span>
+                                                    </div>
+                                                    <p class="text-xs text-secondary mb-2">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">description</i>
+                                                        {{ document.description }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-1">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">link</i>
+                                                        {{ document.slug }}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-0">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">calendar_today</i>
+                                                        Créé le {{ document.createdAt|date('Y-m-d') }}
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer p-2">
+                                                    <div class="btn-group w-100" role="group">
+                                                        <a href="{{ path('app_docs_show', {'id': document.id}) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Voir">
+                                                            <i class="material-icons">visibility</i>
+                                                        </a>
+                                                        <a href="{{ path('app_docs_download', {'id': document.id}) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Télécharger">
+                                                            <i class="material-icons">download</i>
+                                                        </a>
+                                                        <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                            <i class="material-icons">edit</i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            {# Pagination #}
+                            {% if pagination is defined %}
+                                <div class="d-flex justify-content-center mt-4">
+                                    {{ knp_pagination_render(pagination) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    {# Configurateur du thème #}
+    <div class="fixed-plugin">
+        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+            <i class="material-symbols-rounded py-2">settings</i>
+        </a>
+        <div class="card shadow-lg">
+            <div class="card-header pb-0 pt-3">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Paramètres d'affichage</h5>
+                    <p>Personnalisez l'interface</p>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="material-symbols-rounded">clear</i>
+                    </button>
+                </div>
+            </div>
+            <hr class="horizontal dark my-1">
+            <div class="card-body pt-sm-3 pt-0">
+                {# Couleurs de la barre latérale #}
+                <div>
+                    <h6 class="mb-0">Couleur du menu</h6>
+                </div>
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors my-2 text-start">
+                        <span class="badge filter bg-gradient-primary" data-color="primary" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-dark active" data-color="dark" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                    </div>
+                </a>
+                
+                {# Type de barre latérale #}
+                <div class="mt-3">
+                    <h6 class="mb-0">Type de menu</h6>
+                    <p class="text-sm">Choisissez le style de la barre latérale.</p>
+                </div>
+                <div class="d-flex">
+                    <button class="btn bg-gradient-dark px-3 mb-2" data-class="bg-gradient-dark" onclick="sidebarType(this)">Sombre</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 active ms-2" data-class="bg-white" onclick="sidebarType(this)">Clair</button>
+                </div>
+                <p class="text-sm d-xl-none d-block mt-2">Vous pouvez changer le type de menu uniquement sur ordinateur.</p>
+                
+                {# Barre de navigation fixe #}
+                <div class="mt-3 d-flex">
+                    <h6 class="mb-0">Barre de navigation fixe</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-3">
+                
+                {# Mode clair/sombre #}
+                <div class="mt-2 d-flex">
+                    <h6 class="mb-0">Clair / Sombre</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {# Scripts #}
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    
+    <script>
+        // Initialisation du scrollbar
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+        
+        // Initialiser les tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+    
+    <!-- Script pour le switch entre tableaux et grille et les filtres -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Éléments DOM pour la vue
+            const tableViewBtn = document.getElementById('tableViewBtn');
+            const gridViewBtn = document.getElementById('gridViewBtn');
+            const tableView = document.getElementById('tableView');
+            const gridView = document.getElementById('gridView');
+            
+            // Éléments DOM pour le filtre de contenu
+            const showAllBtn = document.getElementById('showAllBtn');
+            const showCategoriesBtn = document.getElementById('showCategoriesBtn');
+            const showDocumentsBtn = document.getElementById('showDocumentsBtn');
+            const categoryItems = document.querySelectorAll('.category-item');
+            const documentItems = document.querySelectorAll('.document-item');
+            
+            // Événement pour afficher la vue tableau
+            tableViewBtn.addEventListener('click', function() {
+                tableView.style.display = 'block';
+                gridView.style.display = 'none';
+                
+                tableViewBtn.classList.add('active');
+                gridViewBtn.classList.remove('active');
+            });
+            
+            // Événement pour afficher la vue grille
+            gridViewBtn.addEventListener('click', function() {
+                tableView.style.display = 'none';
+                gridView.style.display = 'block';
+                
+                gridViewBtn.classList.add('active');
+                tableViewBtn.classList.remove('active');
+            });
+            
+            // Filtre pour afficher tous les éléments
+            showAllBtn.addEventListener('click', function() {
+                categoryItems.forEach(item => item.style.display = '');
+                documentItems.forEach(item => item.style.display = '');
+                
+                showAllBtn.classList.add('active');
+                showCategoriesBtn.classList.remove('active');
+                showDocumentsBtn.classList.remove('active');
+            });
+            
+            // Filtre pour afficher uniquement les catégories
+            showCategoriesBtn.addEventListener('click', function() {
+                categoryItems.forEach(item => item.style.display = '');
+                documentItems.forEach(item => item.style.display = 'none');
+                
+                showCategoriesBtn.classList.add('active');
+                showAllBtn.classList.remove('active');
+                showDocumentsBtn.classList.remove('active');
+            });
+            
+            // Filtre pour afficher uniquement les documents
+            showDocumentsBtn.addEventListener('click', function() {
+                categoryItems.forEach(item => item.style.display = 'none');
+                documentItems.forEach(item => item.style.display = '');
+                
+                showDocumentsBtn.classList.add('active');
+                showAllBtn.classList.remove('active');
+                showCategoriesBtn.classList.remove('active');
+            });
+            
+            // Recherche dans les éléments
+            const searchInput = document.getElementById('search-categories');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                // Filtre les éléments en fonction du terme de recherche
+                if (searchTerm.length > 0) {
+                    // Recherche dans les catégories
+                    categoryItems.forEach(item => {
+                        const categoryName = item.querySelector('h6').textContent.toLowerCase();
+                        const categoryDesc = item.querySelector('p.text-xs.font-weight-bold') ? 
+                                           item.querySelector('p.text-xs.font-weight-bold').textContent.toLowerCase() : '';
+                        
+                        if (categoryName.includes(searchTerm) || categoryDesc.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Recherche dans les documents
+                    documentItems.forEach(item => {
+                        const documentTitle = item.querySelector('h6').textContent.toLowerCase();
+                        const documentDesc = item.querySelector('p.text-xs.font-weight-bold') ? 
+                                           item.querySelector('p.text-xs.font-weight-bold').textContent.toLowerCase() : '';
+                        
+                        if (documentTitle.includes(searchTerm) || documentDesc.includes(searchTerm)) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Si le champ de recherche est vide, afficher tous les éléments
+                    categoryItems.forEach(item => item.style.display = '');
+                    documentItems.forEach(item => item.style.display = '');
+                }
+            });
+        });
+    </script>
+    
+    <script src="{{ asset('assets/js/material-dashboard.min.js') }}"></script>
+{% endblock %}

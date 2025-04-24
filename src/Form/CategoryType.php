@@ -53,15 +53,14 @@ class CategoryType extends AbstractType
                 'class' => CategoryStatus::class,
                 'required' => true,
                 'label' => 'Statut',
-                'choice_label' => function(CategoryStatus $choice): string {
-                    return match($choice) {
-                        CategoryStatus::ACTIVE => 'Actif',
-                        CategoryStatus::INACTIVE => 'Inactif',
-                        CategoryStatus::ARCHIVED => 'Archivé',
-                        // Ajoutez d'autres cas si nécessaire
-                    };
-                }
+                'expanded' => true,
+                'choice_label' => fn(CategoryStatus $choice) => match($choice) {
+                    CategoryStatus::ACTIVE => 'Actif',
+                    CategoryStatus::INACTIVE => 'Inactif',
+                    CategoryStatus::ARCHIVED => 'Archivé',
+                },
             ]);
+            
         
         // Pas de champs createdAt et updatedAt ici
     }

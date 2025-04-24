@@ -66,15 +66,15 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {% if app.request.get('_route') == 'app_login' %}active bg-gradient-dark text-white{% else %}text-dark{% endif %}" href="{{ path('app_register') }}">
-					<i class="material-symbols-rounded opacity-10">login</i>
-					<span class="nav-link-text ms-1">Sign In</span>
+				<a class="nav-link {% if app.request.get('_route') == 'app_logout' %}active bg-gradient-dark text-white{% else %}text-dark{% endif %}" href="{{ path('app_logout') }}">
+					<i class="material-symbols-rounded opacity-10">logout</i>
+					<span class="nav-link-text ms-1">Déconnexion</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link {% if app.request.get('_route') == 'app_signup' %}active bg-gradient-dark text-white{% else %}text-dark{% endif %}" href=" {{ path('app_register') }}">
-					<i class="material-symbols-rounded opacity-10">logout</i>
-					<span class="nav-link-text ms-1">Sign Up</span>
+				<a class="nav-link {% if app.request.get('_route') == 'app_register' %}active bg-gradient-dark text-white{% else %}text-dark{% endif %}" href=" {{ path('app_register') }}">
+					<i class="material-symbols-rounded opacity-10 ">app_registration</i>
+					<span class="nav-link-text ms-1">S'inscrire</span>
 				</a>
 			</li>
 		</ul>

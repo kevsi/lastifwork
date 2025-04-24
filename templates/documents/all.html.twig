@@ -1,9 +1,9 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Documents - Système de Gestion Documentaire{% endblock %}
+{% block title %}Tous les documents - Système de Gestion Documentaire{% endblock %}
 
 {% block body %}
-
     {% set getIconColor = {
         'rapport': 'info',
         'contrat': 'success',
@@ -24,6 +24,7 @@
         'jpg': 'primary',
         'jpeg': 'primary'
     } %}
+    
     {% include "aside.html.twig" %}
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
@@ -37,11 +38,11 @@
                         {# En-tête de la carte #}
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
-                                <h6 class="text-white text-capitalize ps-3">Documents récents</h6>
+                                <h6 class="text-white text-capitalize ps-3">Tous les documents</h6>
                                 <div class="pe-3">
                                     <a href="{{path('app_docs_create')}}" class="btn btn-sm btn-white">Ajouter document</a>
                                     <a href="{{path('app_docs_numerise')}}" class="btn btn-sm btn-white">Numériser un document</a>
-                                    <a href="{{path('app_docs_all')}}" class="btn btn-sm btn-white">Voir tous les documents</a>
+                                    <a href="{{path('app_docs')}}" class="btn btn-sm btn-white">Retour</a>
                                 </div>
                             </div>
                         </div>
@@ -49,13 +50,26 @@
                         {# Corps de la carte avec filtre et recherche #}
                         <div class="card-body px-3 pt-3 pb-2">
                             <div class="row mb-3 align-items-center">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="input-group input-group-outline">
                                         <label class="form-label">Rechercher...</label>
                                         <input type="text" class="form-control" id="search-documents">
                                     </div>
                                 </div>
-                                <div class="col-md-6 text-end">
+                                <div class="col-md-4">
+                                    <div class="input-group input-group-static">
+                                        <label>Filtrer par</label>
+                                        <select name="filter" class="form-control" id="filter-documents">
+                                            <option value="date-desc" {% if currentFilter == 'date-desc' %}selected{% endif %}>Plus récents</option>
+                                            <option value="date-asc" {% if currentFilter == 'date-asc' %}selected{% endif %}>Plus anciens</option>
+                                            <option value="name-asc" {% if currentFilter == 'name-asc' %}selected{% endif %}>Nom (A-Z)</option>
+                                            <option value="name-desc" {% if currentFilter == 'name-desc' %}selected{% endif %}>Nom (Z-A)</option>
+                                            <option value="size-asc" {% if currentFilter == 'size-asc' %}selected{% endif %}>Taille (croissant)</option>
+                                            <option value="size-desc" {% if currentFilter == 'size-desc' %}selected{% endif %}>Taille (décroissant)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
                                     <!-- Boutons pour basculer entre les vues -->
                                     <div class="btn-group me-2" role="group" aria-label="Mode d'affichage">
                                         <button type="button" class="btn btn-sm btn-outline-dark active" id="tableViewBtn">
@@ -65,16 +79,6 @@
                                             <i class="material-icons">grid_view</i>
                                         </button>
                                     </div>
-                                    
-                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                        Filtrer par
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item filter-option" href="#" data-filter="date-desc">Date (récent)</a></li>
-                                        <li><a class="dropdown-item filter-option" href="#" data-filter="date-asc">Date (ancien)</a></li>
-                                        <li><a class="dropdown-item filter-option" href="#" data-filter="name-asc">Nom (A-Z)</a></li>
-                                        <li><a class="dropdown-item filter-option" href="#" data-filter="type">Type</a></li>
-                                    </ul>
                                 </div>
                             </div>
                             
@@ -86,19 +90,21 @@
                                             <tr>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Document</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Catégorie</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Format</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date de création</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Taille</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Auteur</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for document in recentDocuments %}
+                                            {% for document in documents %}
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-2 py-1">
                                                             <div class="icon-document me-3">
-                                                                <i class="material-icons text-{{ getIconColor(document.type) }}"></i>
+                                                                <i class="material-icons text-{{ getIconColor(document.type) }}">description</i>
                                                             </div>
                                                             <div class="d-flex flex-column justify-content-center">
                                                                 <h6 class="mb-0 text-sm">{{ document.title }}</h6>
@@ -107,8 +113,17 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ document.category.name }}</p>
-                                                        <p class="text-xs text-secondary mb-0">{{ document.category.department }}</p>
+                                                        {% if document.category %}
+                                                            <p class="text-xs font-weight-bold mb-0">{{ document.category.name }}</p>
+                                                            <p class="text-xs text-secondary mb-0">{{ document.category.department }}</p>
+                                                        {% else %}
+                                                            <p class="text-xs text-secondary mb-0">Non classé</p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span class="badge badge-sm bg-gradient-{{ getIconColor(document.type) }}">
+                                                            {{ document.type }}
+                                                        </span>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
                                                         <span class="badge badge-sm bg-gradient-{{ getFormatColor(document.format) }}">
@@ -116,10 +131,17 @@
                                                         </span>
                                                     </td>
                                                     <td class="align-middle text-center">
-                                                        <span class="text-secondary text-xs font-weight-bold">{{ document.createdAt|date('Y/m/d') }}</span>
+                                                        <span class="text-secondary text-xs font-weight-bold">{{ (document.size / 1024)|round(1) }} KB</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span class="text-secondary text-xs font-weight-bold">{{ document.createdAt|date('d/m/Y H:i') }}</span>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
-                                                        {{ document.author.fullName }}
+                                                        {% if document.author is defined %}
+                                                            {{ document.author.fullName }}
+                                                        {% else %}
+                                                            {{ document.user.fullName }}
+                                                        {% endif %}
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         <div class="btn-group" role="group">
@@ -129,15 +151,23 @@
                                                             <a href="{{ path('app_docs_download', {'id': document.id}) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Télécharger">
                                                                 <i class="material-icons">download</i>
                                                             </a>
-                                                            <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
-                                                                <i class="material-icons">edit</i>
-                                                            </a>
+                                                            {% if is_granted('EDIT', document) %}
+                                                                <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                                    <i class="material-icons">edit</i>
+                                                                </a>
+                                                            {% endif %}
+                                                            {% if is_granted('DELETE', document) %}
+                                                                <a href="{{ path('app_docs_delete', {'id': document.id}) }}" class="btn btn-sm btn-danger" 
+                                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce document?');" title="Supprimer">
+                                                                    <i class="material-icons">delete</i>
+                                                                </a>
+                                                            {% endif %}
                                                         </div>
                                                     </td>
                                                 </tr>
                                             {% else %}
                                                 <tr>
-                                                    <td colspan="6" class="text-center py-4">
+                                                    <td colspan="8" class="text-center py-4">
                                                         <p class="text-secondary">Aucun document disponible</p>
                                                     </td>
                                                 </tr>
@@ -150,7 +180,7 @@
                             <!-- Vue en grille (cachée par défaut) -->
                             <div id="gridView" style="display: none;">
                                 <div class="row">
-                                    {% for document in recentDocuments %}
+                                    {% for document in documents %}
                                         <div class="col-md-4 col-lg-3 mb-4">
                                             <div class="card h-100">
                                                 <div class="card-header p-3 bg-light">
@@ -169,19 +199,33 @@
                                                         <span class="badge badge-sm bg-gradient-{{ getFormatColor(document.format) }}">
                                                             {{ document.format|upper }}
                                                         </span>
-                                                        <span class="text-xs ms-1">{{ document.category.name }}</span>
+                                                        <span class="badge badge-sm bg-gradient-{{ getIconColor(document.type) }}">
+                                                            {{ document.type }}
+                                                        </span>
                                                     </div>
                                                     <p class="text-xs text-secondary mb-1">
                                                         <i class="material-icons align-middle" style="font-size: 0.85rem;">folder</i>
-                                                        {{ document.category.department }}
+                                                        {% if document.category %}
+                                                            {{ document.category.name }}
+                                                        {% else %}
+                                                            Non classé
+                                                        {% endif %}
+                                                    </p>
+                                                    <p class="text-xs text-secondary mb-1">
+                                                        <i class="material-icons align-middle" style="font-size: 0.85rem;">storage</i>
+                                                        {{ (document.size / 1024)|round(1) }} KB
                                                     </p>
                                                     <p class="text-xs text-secondary mb-1">
                                                         <i class="material-icons align-middle" style="font-size: 0.85rem;">calendar_today</i>
-                                                        {{ document.createdAt|date('Y/m/d') }}
+                                                        {{ document.createdAt|date('d/m/Y') }}
                                                     </p>
                                                     <p class="text-xs text-secondary mb-0">
                                                         <i class="material-icons align-middle" style="font-size: 0.85rem;">person</i>
-                                                        {{ document.author.fullName }}
+                                                        {% if document.author is defined %}
+                                                            {{ document.author.fullName }}
+                                                        {% else %}
+                                                            {{ document.user.fullName }}
+                                                        {% endif %}
                                                     </p>
                                                 </div>
                                                 <div class="card-footer p-2">
@@ -192,9 +236,17 @@
                                                         <a href="{{ path('app_docs_download', {'id': document.id}) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" title="Télécharger">
                                                             <i class="material-icons">download</i>
                                                         </a>
-                                                        <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
-                                                            <i class="material-icons">edit</i>
-                                                        </a>
+                                                        {% if is_granted('EDIT', document) %}
+                                                            <a href="{{ path('app_docs_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                                <i class="material-icons">edit</i>
+                                                            </a>
+                                                        {% endif %}
+                                                        {% if is_granted('DELETE', document) %}
+                                                            <a href="{{ path('app_docs_delete', {'id': document.id}) }}" class="btn btn-sm btn-danger" 
+                                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce document?');" title="Supprimer">
+                                                                <i class="material-icons">delete</i>
+                                                            </a>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,16 +258,6 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            
-                            {# Message d'invitation si les documents sont limités #}
-                            {% if hasMoreDocuments %}
-                                <div class="text-center mt-3">
-                                    <p class="text-sm text-secondary mb-2">Affichage des 10 documents les plus récents</p>
-                                    <a href="{{ path('app_docs_all') }}" class="btn btn-sm btn-outline-primary">
-                                        Voir tous les documents
-                                    </a>
-                                </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -312,7 +354,7 @@
         });
     </script>
     
-    <!-- Script pour le switch entre tableaux et grille -->
+    <!-- Script pour le switch entre tableaux et grille et le filtrage -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Éléments DOM
@@ -321,6 +363,7 @@
             const tableView = document.getElementById('tableView');
             const gridView = document.getElementById('gridView');
             const searchInput = document.getElementById('search-documents');
+            const filterSelect = document.getElementById('filter-documents');
             
             // Événement pour afficher la vue tableau
             tableViewBtn.addEventListener('click', function() {
@@ -346,16 +389,28 @@
                 filterDocuments(searchTerm);
             });
             
+            // Filtrer par le critère sélectionné
+            filterSelect.addEventListener('change', function() {
+                const selectedFilter = this.value;
+                window.location.href = "{{ path('app_docs_all') }}?filter=" + selectedFilter;
+            });
+            
             // Filtrer les documents selon le terme de recherche
             function filterDocuments(searchTerm) {
                 // Filtrer dans la vue tableau
                 const tableRows = document.querySelectorAll('#tableView tbody tr');
                 tableRows.forEach(row => {
-                    const docTitle = row.querySelector('h6').textContent.toLowerCase();
-                    const docFilename = row.querySelector('h6 + p').textContent.toLowerCase();
-                    const docCategory = row.querySelector('td:nth-child(2) p').textContent.toLowerCase();
+                    const docTitle = row.querySelector('h6')?.textContent.toLowerCase() || '';
+                    const docFilename = row.querySelector('h6 + p')?.textContent.toLowerCase() || '';
+                    const docType = row.querySelector('td:nth-child(3) span')?.textContent.toLowerCase() || '';
+                    const docFormat = row.querySelector('td:nth-child(4) span')?.textContent.toLowerCase() || '';
+                    const docCategory = row.querySelector('td:nth-child(2) p')?.textContent.toLowerCase() || '';
                     
-                    if (docTitle.includes(searchTerm) || docFilename.includes(searchTerm) || docCategory.includes(searchTerm)) {
+                    if (docTitle.includes(searchTerm) || 
+                        docFilename.includes(searchTerm) || 
+                        docType.includes(searchTerm) || 
+                        docFormat.includes(searchTerm) || 
+                        docCategory.includes(searchTerm)) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';
@@ -365,11 +420,17 @@
                 // Filtrer dans la vue grille
                 const gridCards = document.querySelectorAll('#gridView .col-md-4');
                 gridCards.forEach(card => {
-                    const docTitle = card.querySelector('h6').textContent.toLowerCase();
-                    const docFilename = card.querySelector('h6 + p').textContent.toLowerCase();
-                    const docCategory = card.querySelector('.card-body span.text-xs').textContent.toLowerCase();
+                    const docTitle = card.querySelector('h6')?.textContent.toLowerCase() || '';
+                    const docFilename = card.querySelector('h6 + p')?.textContent.toLowerCase() || '';
+                    const docFormat = card.querySelector('.badge:first-child')?.textContent.toLowerCase() || '';
+                    const docType = card.querySelector('.badge:nth-child(2)')?.textContent.toLowerCase() || '';
+                    const docCategory = card.querySelector('.card-body p:first-child')?.textContent.toLowerCase() || '';
                     
-                    if (docTitle.includes(searchTerm) || docFilename.includes(searchTerm) || docCategory.includes(searchTerm)) {
+                    if (docTitle.includes(searchTerm) || 
+                        docFilename.includes(searchTerm) || 
+                        docType.includes(searchTerm) || 
+                        docFormat.includes(searchTerm) || 
+                        docCategory.includes(searchTerm)) {
                         card.style.display = '';
                     } else {
                         card.style.display = 'none';
@@ -382,18 +443,6 @@
             if (preferredView === 'grid') {
                 gridViewBtn.click();
             }
-            
-            // Options de filtrage
-            document.querySelectorAll('.filter-option').forEach(option => {
-                option.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const filterType = this.getAttribute('data-filter');
-                    
-                    // Envoyer une requête AJAX pour filtrer les documents
-                    // ou rediriger vers une URL avec le paramètre de filtre
-                    window.location.href = "{{ path('app_docs') }}?filter=" + filterType;
-                });
-            });
         });
     </script>
 {% endblock %}

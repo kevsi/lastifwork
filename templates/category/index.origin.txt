@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Explorateur de Catégories{% endblock %}
+
+
+
+{% block body %}
+    {% include "aside.html.twig" %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        <!-- Navbar -->
+        {% include "navbar.html.twig" %}
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+            
+        </div>
+    </main>
+{% endblock %}
+

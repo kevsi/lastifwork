@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories - Système de Gestion Documentaire{% endblock %}
+
+{% block body %}
+    {% include "aside.html.twig" %}
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+        {% include "navbar.html.twig" %}
+
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center">
+                                <h6 class="text-white text-capitalize ps-3">Catégories</h6>
+                                <div class="pe-3">
+                                    <a href="{{ path('app_categories_create') }}" class="btn btn-sm btn-white">Ajouter une catégorie</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body px-3 pt-3 pb-2">
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-outline">
+                                        <label class="form-label">Rechercher...</label>
+                                        <input type="text" class="form-control" id="search-categories">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Trier par
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Nom (A-Z)</a></li>
+                                        <li><a class="dropdown-item" href="#">Nom (Z-A)</a></li>
+                                        <li><a class="dropdown-item" href="#">Nombre de documents</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre de documents</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date de création</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in 1..5 %}
+                                            <tr>
+                                                <td>
+                                                    <h6 class="mb-0 text-sm">Catégorie {{ i }}</h6>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">Description de la catégorie {{ i }}</p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <span class="badge badge-sm bg-gradient-info">{{ 3 * i }} documents</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span class="text-secondary text-xs font-weight-bold">{{ "2024-04-0#{i}" }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <div class="btn-group" role="group">
+                                                        <a href="#" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Voir">
+                                                            <i class="material-icons">visibility</i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Modifier">
+                                                            <i class="material-icons">edit</i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Supprimer">
+                                                            <i class="material-icons">delete</i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-4">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'partials/theme-configurator.html.twig' %}
+{% endblock %}
